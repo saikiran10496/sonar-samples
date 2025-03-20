@@ -9,17 +9,23 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
+      - name: Install Snyk CLI
+        run: |
+          curl --compressed https://downloads.snyk.io/cli/stable/snyk-linux -o snyk
+          chmod +x ./snyk
+          sudo mv ./snyk /usr/local/bin/
       
             # Run Snyk to check for code vulnerabilities and generate report
       - name: Snyk Code Test
-        run: snyk code test
+        run: snyk code test --all-projects
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       # Run Snyk to check for dependencies vulnerabilities and generate report
       - name: Snyk Dependencies Test
-        run: snyk test
+        run: snyk test --all-projects
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
