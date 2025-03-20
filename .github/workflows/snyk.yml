@@ -12,19 +12,15 @@ jobs:
       
             # Run Snyk to check for code vulnerabilities and generate report
       - name: Snyk Code Test
-        uses: snyk/actions/node@master
+        run: snyk code test
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
-        with:
-          command: code test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       # Run Snyk to check for dependencies vulnerabilities and generate report
       - name: Snyk Dependencies Test
-        uses: snyk/actions/node@master
+        run: snyk test
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
-        with:
-          command: test
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
