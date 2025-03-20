@@ -1,0 +1,38 @@
+name: Security Scan test
+
+on:
+  push:
+    branches: main
+  workflow_dispatch:  # Allow manual triggers
+jobs:
+  security:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      
+            # Run Snyk to check for code vulnerabilities and generate report
+      - name: Snyk Code Test
+        uses: snyk/actions/node@master
+        continue-on-error: true  # Don't fail the workflow on vulnerabilities
+        with:
+          command: code test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Run Snyk to check for dependencies vulnerabilities and generate report
+      - name: Snyk Dependencies Test
+        uses: snyk/actions/node@master
+        continue-on-error: true  # Don't fail the workflow on vulnerabilities
+        with:
+          command: test
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
+      # Monitor the project in Snyk
+     # - name: Monitor Project in Snyk
+      #  uses: snyk/actions/node@master
+       # with:
+        #  command: monitor
+         # args: --project-name=github/${{ github.repository }}
+       # env:
+        #  SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}     
