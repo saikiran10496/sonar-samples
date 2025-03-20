@@ -2,7 +2,7 @@ name: Security Scan test
 
 on:
   push:
-    branches: main
+    branches: master
   workflow_dispatch:  # Allow manual triggers
 jobs:
   security:
