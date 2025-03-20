@@ -18,14 +18,14 @@ jobs:
       
             # Run Snyk to check for code vulnerabilities and generate report
       - name: Snyk Code Test
-        run: snyk code test --all-projects --report --report --detection-depth=10 --project-name="${{ github.event.repository.name }}" --target-name="${{ github.repository }}"
+        run: snyk code test --all-projects --report --detection-depth=10 --project-name="${{ github.event.repository.name }}" --target-name="${{ github.repository }}"
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       # Run Snyk to check for dependencies vulnerabilities and generate report
       - name: Snyk Dependencies Test
-        run: snyk test --all-projects --report --report --detection-depth=10 --project-name="${{ github.event.repository.name }}" --target-name="${{ github.repository }}"
+        run: snyk test --all-projects --report --detection-depth=10 --project-name="${{ github.event.repository.name }}" --target-name="${{ github.repository }}"
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
