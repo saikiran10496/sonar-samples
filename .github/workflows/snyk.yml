@@ -23,12 +23,36 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-      # Run Snyk to check for dependencies vulnerabilities and generate report
+      - name: Restore Dependencies for All Projects
+        run: |
+          echo "Restoring dependencies for Angular, AngularJS, .NET, Node.js, and .NET Core"
+          
+          # Restore .NET & .NET Core dependencies
+          if [ -f "dotnetcore/WebAppRazor/WebAppRazor.csproj" ]; then
+            dotnet restore dotnetcore/WebAppRazor/WebAppRazor
+          fi
+          if [ -f "dotnet/WebApp.csproj" ]; then
+            dotnet restore dotnet/WebApp.csproj
+          fi
+      
+          # Restore Node.js & Angular dependencies
+          if [ -f "angular/package.json" ]; then
+            cd angular && npm install && cd ..
+          fi
+          if [ -f "nodejs/package.json" ]; then
+            cd nodejs && npm install && cd ..
+          fi
+          if [ -f "angularjs/package.json" ]; then
+            cd angularjs && npm install && cd ..
+          fi
+        shell: bash
+      
       - name: Snyk Dependencies Test
         run: snyk test --all-projects
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
 
       - name: Snyk Code Test Angular
         run: snyk code test ./angular/simple-app
