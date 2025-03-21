@@ -60,6 +60,12 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
 
+      - name: Snyk Code Test Angularjs
+        run: snyk code test ./angularjs1
+        continue-on-error: true  # Don't fail the workflow on vulnerabilities
+        env:
+          SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
+
       # Monitor the project in Snyk
      # - name: Monitor Project in Snyk
       #  uses: snyk/actions/node@master
