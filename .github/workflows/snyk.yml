@@ -28,21 +28,21 @@ jobs:
           echo "Restoring dependencies for Angular, AngularJS, .NET, Node.js, and .NET Core"
           
           # Restore .NET & .NET Core dependencies
-          if [ -f "dotnetcore/WebAppRazor/WebAppRazor.csproj" ]; then
+          if [ -f "dotnetcore/WebAppRazor/WebAppRazor" ]; then
             dotnet restore dotnetcore/WebAppRazor/WebAppRazor
           fi
-          if [ -f "dotnet/WebApp.csproj" ]; then
+          if [ -f "dotnet/WebApp45/WebApp45" ]; then
             dotnet restore dotnet/WebApp.csproj
           fi
       
           # Restore Node.js & Angular dependencies
-          if [ -f "angular/package.json" ]; then
+          if [ -f "angular/simple-app" ]; then
             cd angular && npm install && cd ..
           fi
-          if [ -f "nodejs/package.json" ]; then
+          if [ -f "nodejs/simple-app" ]; then
             cd nodejs && npm install && cd ..
           fi
-          if [ -f "angularjs/package.json" ]; then
+          if [ -f "angularjs/simple-app" ]; then
             cd angularjs && npm install && cd ..
           fi
         shell: bash
