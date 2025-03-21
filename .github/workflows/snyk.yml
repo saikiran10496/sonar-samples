@@ -49,10 +49,10 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Restore Dependencies
-        run: dotnet restore ./dotnetcore/WebAppRazor
+        run: dotnet restore ./dotnetcore/WebAppRazor/WebAppRazor
 
       - name: Snyk Test dotnetcore
-        run: snyk test ./dotnetcore/WebAppRazor
+        run: snyk test ./dotnetcore/WebAppRazor/WebAppRazor
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
