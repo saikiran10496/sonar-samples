@@ -48,8 +48,8 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
-     # - name: Restore Dependencies
-     #   run: dotnet restore ./dotnetcore/WebAppRazor/WebAppRazor
+      - name: Restore Dependencies
+        run: dotnet restore ./dotnetcore/WebAppRazor/WebAppRazor
 
       - name: Snyk Test dotnetcore
         run: snyk test ./dotnetcore/WebAppRazor/WebAppRazor
