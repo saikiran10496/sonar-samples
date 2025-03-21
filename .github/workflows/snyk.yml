@@ -24,7 +24,7 @@ jobs:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
 
       - name: Restore Dependencies for All Projects
-        run: dotnet restore ./dotnetcore/WebAppRazor/WebAppRazor && dotnet restore dotnet/WebApp45/WebApp45 && cd angular/simple-app && npm install && cd nodejs/simple-app && npm install && cd angularjs/simple-app && npm install
+        run: dotnet restore ./dotnetcore/WebAppRazor/WebAppRazor && dotnet restore dotnet/WebApp45/WebApp45 && cd angular/simple-app && npm install && cd ../.. && cd nodejs/simple-app && npm install && cd ../.. && cd angularjs/simple-app && npm install && cd ../..
       
       - name: Snyk Dependencies Test
         run: snyk test --all-projects
