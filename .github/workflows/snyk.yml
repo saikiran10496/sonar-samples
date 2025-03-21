@@ -60,7 +60,7 @@ jobs:
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }} 
 
-      - name: Snyk Code Test Angularjs
+      - name: Snyk Code Test Angularjs1
         run: snyk code test ./angularjs1
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
