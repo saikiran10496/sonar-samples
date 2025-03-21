@@ -18,7 +18,7 @@ jobs:
       
             # Run Snyk to check for code vulnerabilities and generate report
       - name: Snyk Code Test
-        run: snyk code test --all-projects -d
+        run: snyk code test
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
