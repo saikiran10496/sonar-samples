@@ -25,7 +25,7 @@ jobs:
 
       # Run Snyk to check for dependencies vulnerabilities and generate report
       - name: Snyk Dependencies Test
-        run: snyk test
+        run: snyk test --all-projects
         continue-on-error: true  # Don't fail the workflow on vulnerabilities
         env:
           SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
